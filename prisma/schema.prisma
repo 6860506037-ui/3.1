@@ -1,0 +1,48 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Movie {
+  id      Int      @id @default(autoincrement())
+  title   String
+  rating  String   // G, PG-13, R
+  poster  String
+  genre   String
+  tickets Ticket[]
+}
+
+model Seat {
+  id          Int          @id @default(autoincrement())
+  rowName     String       // A-H
+  seatNumber  Int          // 1-8
+  status      String       @default("AVAILABLE") // AVAILABLE, RESERVED
+  ticketItems TicketItem[]
+}
+
+model Ticket {
+  id              Int          @id @default(autoincrement())
+  totalPrice      Float
+  discountApplied Boolean
+  createdAt       DateTime     @default(now())
+  movieId         Int
+  movie           Movie        @relation(fields: [movieId], references: [id])
+  ticketItems     TicketItem[]
+
+  @@index([movieId])
+}
+
+model TicketItem {
+  id       Int    @id @default(autoincrement())
+  ticketId Int
+  seatId   Int
+  ticket   Ticket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  seat     Seat   @relation(fields: [seatId], references: [id])
+
+  @@index([ticketId])
+  @@index([seatId])
+}
