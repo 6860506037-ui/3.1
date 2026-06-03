@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "title": "That Time I Got Reincarnated as a Slime: Scarlet Bond",
+    "rating": "G",
+    "genre": "อนิเมะสไลม์",
+    "duration": "Anime, Fantasy, 120 min",
+    "image": "/slime.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Demon Slayer: Kimetsu no Yaiba – To the Swordsmith Village",
+    "rating": "PG",
+    "genre": "ดาบพิฆาตอสูร",
+    "duration": "120 min",
+    "image": "/demonslayer.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Spy x Family Code: White",
+    "rating": "G",
+    "genre": "สปาย x แฟมิลี่",
+    "duration": "110 min",
+    "image": "/spyxfamily.jpg"
+  },
+  {
+    "id": 4,
+    "title": "มหาเวทย์ผนึกมาร",
+    "rating": "15+",
+    "genre": "มหาเวทย์ผนึกมาร",
+    "duration": "105 min",
+    "image": "/jujutsu.jpg"
+  }
+]
