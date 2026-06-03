@@ -32,7 +32,7 @@ function App() {
   }
 
   const fetchReservedSeats = (movieTitle) => {
-    fetch(`http://localhost:5000/api/reserved-seats?movieTitle=${encodeURIComponent(movieTitle)}`)
+    fetch(`http://s6860506037-32-b-cbwu7a-f6ebf4-202-29-70-18.sslip.io//api/reserved-seats?movieTitle=${encodeURIComponent(movieTitle)}`)
       .then(res => res.json())
       .then(data => setReservedSeats(data))
       .catch(err => console.error(err))
