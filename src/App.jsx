@@ -24,22 +24,25 @@ function App() {
   const [newMovieDuration, setNewMovieDuration] = useState('')
   const [newMovieRating, setNewMovieRating] = useState('G')
 
+  // ลิงก์หลักของหลังบ้านบน Dokploy
+  const BACKEND_URL = 'http://s6860506037-32-b-cbwu7a-f6ebf4-202-29-70-18.sslip.io'
+
   const fetchMovies = () => {
-    fetch('http://localhost:5000/api/movies')
+    fetch(`${BACKEND_URL}/api/movies`)
       .then(res => res.json())
       .then(data => setMovies(data))
       .catch(err => console.error(err))
   }
 
   const fetchReservedSeats = (movieTitle) => {
-    fetch(`http://s6860506037-32-b-cbwu7a-f6ebf4-202-29-70-18.sslip.io//api/reserved-seats?movieTitle=${encodeURIComponent(movieTitle)}`)
+    fetch(`${BACKEND_URL}/api/reserved-seats?movieTitle=${encodeURIComponent(movieTitle)}`)
       .then(res => res.json())
       .then(data => setReservedSeats(data))
       .catch(err => console.error(err))
   }
 
   const fetchAllBookings = () => {
-    fetch('http://localhost:5000/api/judge/bookings', {
+    fetch(`${BACKEND_URL}/api/judge/bookings`, {
       headers: { 'Authorization': `Bearer ${token}` }
     })
       .then(res => res.json())
@@ -62,7 +65,7 @@ function App() {
 
   const handleLogin = (e) => {
     e.preventDefault()
-    fetch('http://localhost:5000/api/auth/login', {
+    fetch(`${BACKEND_URL}/api/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: loginUser, password: loginPass })
@@ -98,7 +101,7 @@ function App() {
     const subtotal = calculateSubtotal()
     const finalTotal = isDiscountApplied ? subtotal * 0.9 : subtotal
 
-    fetch('http://localhost:5000/api/bookings', {
+    fetch(`${BACKEND_URL}/api/bookings`, {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',
@@ -120,7 +123,7 @@ function App() {
   }
 
   const handleUpdateBookingStatus = (id, status) => {
-    fetch(`http://localhost:5000/api/judge/bookings/${id}`, {
+    fetch(`${BACKEND_URL}/api/judge/bookings/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -137,7 +140,7 @@ function App() {
 
   const handleAddMovie = (e) => {
     e.preventDefault()
-    fetch('http://localhost:5000/api/manager/movies', {
+    fetch(`${BACKEND_URL}/api/manager/movies`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -165,7 +168,7 @@ function App() {
   const handleDeleteMovie = (movieId, movieTitle) => {
     if (window.confirm(`คุณแน่ใจหรือไม่ที่จะลบอนิเมะเรื่อง "${movieTitle}" ออกจากหน้าต่างนี้?`)) {
       // ยิงไปบอกหลังบ้านขำ ๆ (ถ้าหลังบ้านไม่รองรับก็ช่างมัน) แล้วสั่งซ่อนที่หน้าจอก่อนเลย
-      fetch(`http://localhost:5000/api/manager/movies/${movieId}`, {
+      fetch(`${BACKEND_URL}/api/manager/movies/${movieId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       }).catch(() => {}) 
